@@ -29,8 +29,6 @@ def scrape_M451dn(model):
 	toner_tree = tree.xpath("//td[contains(text(), 'Black Cartridge')]/text()")
 	toner_perc_tree = tree.xpath("//td[contains(text(), 'Black')]/following-sibling::td/text()")
 
-	black = {}
-
 	black['name']    = re.sub(r'\s+', ' ', toner_tree[0]).strip()
 	black['order']   = re.sub(r'\s+', ' ', toner_tree[1]).strip()
 	black['percent'] = re.sub(r'\s+', ' ', toner_perc_tree[0]).strip()
@@ -78,7 +76,6 @@ for i in data:
 	title_list = tree.xpath('//title/text()')
 
 	if not title_list:
-#		print(":( No fingerprint: [" + ip + "] null")
 		pass
 	else:
 		title = title_list[0]
@@ -86,12 +83,10 @@ for i in data:
 		supply = {}
 
 		if "Web Image Monitor" in title:
-			pass
-#			print("------- :) [" + ip + "] Savin ???")
+			model = "Generic Savin"
 
 		if "Brother" in title:
-			pass
-#			print("------- :) [" + ip + "] Brother ???")
+			model = "Generic Brother"
 
 		if "LaserJet" in title:
 			if "M401dn" in title:
@@ -152,4 +147,4 @@ for i in data:
 			print()
 
 		if "Hewlett Packard" in title:
-			pass
+			model = "Generic Hewlett Packard"
